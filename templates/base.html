@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>부자되세요</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=1.0">
+  {% block head %}{% endblock %}
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background-color: #f5f6fa;
+      color: #2f3640;
+    }
+    .header {
+      background: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo a {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2e86de;
+      text-decoration: none;
+    }
+    .nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav a:hover {
+      color: #2e86de;
+    }
+    .footer {
+      background: #f1f2f6;
+      padding: 1.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      border-top: 1px solid #dcdde1;
+    }
+    main {
+      padding: 2rem;
+      min-height: 80vh;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ 헤더 -->
+  <header class="header">
+    <div class="logo"><a href="/">💰 부자되세요</a></div>
+    <nav class="nav">
+      <a href="/calculator">복리 계산기</a>
+      <a href="/investment_propensity_analysis">투자 성향 분석기</a>
+      <a href="/news">시사 /💰뉴스</a>
+      <a href="/community">커뮤니티</a>
+      {% if id %}
+        <span style="margin-left: 1rem; font-weight: bold;">환영합니다, <a href="/mypage">{{ id }}</a></span>
+        <a href="/logout">로그아웃</a>
+      {% else %}
+        <a href="/login">로그인</a>
+        <a href="/register">회원가입</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <!-- ✅ 콘텐츠 -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ✅ 푸터 -->
+  <footer class="footer">
+    © 2025 부자되세요. 모두의 금융 가이드
+  </footer>
+
+</body>
+</html>

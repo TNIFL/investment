@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <meta charset="UTF-8">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>커뮤니티</h1>
+
+  {% if id %}
+    <h2>{{ id }} 님, 환영합니다!</h2>
+    <p>자유롭게 대화하세요!</p>
+    <div class="hero-buttons">
+      <a href="/community/write" class="btn-primary">글 쓰기</a>
+    </div>
+  {% else %}
+    <div class="btn-primary">
+      <a href="/login" class="btn-primary">글 작성을 하려면 로그인하세요</a>
+    </div>
+  {% endif %}
+</section>
+
+<section class="post-list">
+  <h2>글 목록</h2>
+  <table class="post-table">
+    <thead>
+      <tr>
+        <th>글 번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성 시간</th>
+        <th>조회수</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <td>{{ post.id }}</td>
+        <td><a href="/community/{{ post.id }}">{{ post.title }}</a></td>
+        <td>{{ post.user_id }}</td>
+        <td>{{ post.time.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td>{{ post.click_count }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">게시글이 없습니다.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

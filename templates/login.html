@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <div class="background">
+        <form action="/login" method="POST">
+            <div class="login_form">
+                <div class="login_info">
+                    <div class="field">
+                        <label for="id">ID</label>
+                        <input type="text" id="id" name="id">
+                    </div>
+                    <div class="field">
+                        <label for="password">password</label>
+                        <input type="text" id="password" name="password">
+                    </div>
+                </div>
+                <div class="login_btn">
+                    <button tyep="submit">LOGIN</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% if alert_message %}
+<script>
+    alert("{{ alert_message }}")
+</script>
+{% endif %}
+
+
+</body>
+
+{% endblock %}

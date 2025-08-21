@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}마이페이지 - 부자되세요{% endblock %}
+
+{% block content %}
+<div class="mypage">
+  <h2>마이페이지</h2>
+  <p><strong>id : </strong> {{ id }}</p>
+  <div class="mypage-section">
+    <h3>내가 쓴 글</h3>
+    <ul>
+          {% for post in posts %}
+            {% if id == posts.user_id %}
+              <li><a href="/community/{{ post.id }}">{{ post.title }}</a></li>
+            {% endif %}
+          {% else %}
+          <li>작성한 글이 없습니다.</li>
+          {% endfor %}
+    </ul>
+  </div>
+</div>
+
+  <div class="mypage-section">
+    <h3>스크랩한 뉴스</h3>
+    <ul>
+      {% for news in news_data %}
+      <li><a href="{{ news.url }}">{{ news.title }}</a></li>
+      {% else %}
+      <li>스크랩한 뉴스가 없습니다.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
+
+<!-- 마이페이지에서 내가 쓴 글, 내가 좋아요 한 뉴스 모아서 볼 수 있음 -->

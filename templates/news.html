@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .filter-buttons button {
+      background-color: #ecf0f1;
+      color: #2c3e50;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.3rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .filter-buttons button:hover {
+      background-color: #dcdde1;
+    }
+    .news-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .news-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 350px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+    .news-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #34495e;
+      margin-bottom: 0.5rem;
+    }
+    .news-upload-time {
+      font-size: 0.8rem;
+      color: #bfbfbf;
+      margin: 0.4rem 0;
+      line-height: 1.5;
+    }
+    .news-summary {
+      font-size: 0.95rem;
+      color: #555;
+      margin: 0.5rem 0;
+      line-height: 1.5;
+    }
+    .news-category {
+      font-size: 0.85rem;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+    .category-정치 { background-color: #3498db; }
+    .category-IT { background-color: #2ecc71; }
+    .category-경제 { background-color: #e74c3c; }
+    .category-날씨 { background-color: #f1c40f; }
+    .category-사회 { background-color: #34495e; }
+    .category-문화 { background-color: #e67e22; }
+
+    .news-link {
+      margin-top: 1rem;
+      text-align: right;
+    }
+    .news-link a {
+      font-size: 0.9rem;
+      color: #2980b9;
+      text-decoration: none;
+    }
+    .news-link a:hover {
+      text-decoration: underline;
+    }
+    .like-button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #ecf0f1;
+      cursor: pointer;
+      color: #34495e;
+    }
+    .like-button:hover {
+      background-color: #dcdde1;
+    }
+    .liked {
+      background-color: #ff6b81 !important;
+      color: white !important;
+    }
+  </style>
+</head>
+<body>
+  <h1>오늘의 뉴스 요약</h1>
+  <div class="filter-buttons">
+    <button onclick="filterCategory('전체')">전체</button>
+    <button onclick="filterCategory('정치')">정치</button>
+    <button onclick="filterCategory('IT')">IT</button>
+    <button onclick="filterCategory('경제')">경제</button>
+    <button onclick="filterCategory('날씨')">날씨</button>
+    <button onclick="filterCategory('사회')">사회</button>
+    <button onclick="filterCategory('문화')">문화</button>
+  </div>
+  <div class="news-container">
+    {% for news in news_data %}
+    <div class="news-card" data-category="{{ news.category }}">
+      <div class="news-title">{{ news.title }}</div>
+      <div class="news-upload-time">{{ news.upload_time }}</div>
+      <div class="news-summary">{{ news.summary }}</div>
+      <div class="news-category category-{{ news.category }}">{{ news.category }}</div>
+      <div class="news-link">
+        <a href="{{ news.url }}" target="_blank">기사 전체보기 →</a>
+      </div>
+      {% if id %}
+      <button class="like-button" onclick="toggleLike(this)">♥ 좋아요</button>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    function filterCategory(category) {
+      const cards = document.querySelectorAll('.news-card');
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === '전체' || cardCategory === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function toggleLike(button) {
+      const liked = button.classList.contains('liked');
+      if (liked) {
+        button.classList.remove('liked');
+        button.textContent = '♥ 좋아요';
+      } else {
+        button.classList.add('liked');
+        button.textContent = '좋아요 완료';
+      }
+    }
+  </script>
+</body>
+
+{% endblock %}

@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <meta charset="UTF-8">
+  <style>
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+      text-align: center;
+      padding: 4rem 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+    .hero-buttons a {
+      display: inline-block;
+      margin: 0 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background-color: #2e86de;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: #1e6bb8;
+    }
+    .btn-outline {
+      border: 2px solid #2e86de;
+      color: #2e86de;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background-color: #2e86de;
+      color: #fff;
+    }
+
+    /* Features */
+    .features {
+      padding: 3rem 1.5rem;
+      background-color: #fff;
+    }
+    .features h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+    .feature-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: #fafafa;
+      padding: 1.5rem;
+      border-radius: 12px;
+      width: 280px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h3 {
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    .card p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .card a {
+      color: #2e86de;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Guide */
+    .guide {
+      background: #f0f4f8;
+      padding: 3rem 1.5rem;
+    }
+    .guide h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .guide-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    /* News section */
+    .content-row {
+      padding: 2rem;
+      background-color: #ffffff;
+    }
+    .news ul {
+      list-style: none;
+      padding: 0;
+    }
+    .news li {
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #e1e1e1;
+      padding-bottom: 1rem;
+    }
+    .news a {
+      font-size: 1.1rem;
+      color: #2c3e50;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .news span {
+      display: block;
+      color: #888;
+      margin-top: 0.25rem;
+    }
+    .news small {
+      display: block;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: #fff;
+    }
+    .cta h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background: #fff;
+      color: #2c3e50;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .btn-cta:hover {
+      background: #e1e9f0;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<!-- ✅ Hero Section (뉴스 중심 소개) -->
+<section class="hero">
+  <h1>최신 이슈를 한눈에</h1>
+  <p>카테고리별 뉴스 요약, AI 분류, 핵심 정보만 빠르게!</p>
+  <div class="hero-buttons">
+    <a href="/news" class="btn-primary">뉴스 요약 보러가기</a>
+    <a href="/community" class="btn-outline">커뮤니티 바로가기</a>
+  </div>
+</section>
+
+<!-- ✅ 뉴스 요약 기능 강조 -->
+<section class="features">
+  <h2>📰 뉴스 요약 기능</h2>
+  <div class="feature-grid">
+    <div class="card">
+      <h3>📌 분야별 분류</h3>
+      <p>정치, IT, 경제, 사회 등 AI가 자동 분류</p>
+      <a href="/news">분야별 뉴스 보기</a>
+    </div>
+    <div class="card">
+      <h3>🧠 AI 요약</h3>
+      <p>긴 뉴스를 3줄 요약으로 핵심만 빠르게</p>
+      <a href="/news">요약된 뉴스 보기</a>
+    </div>
+    <div class="card">
+      <h3>🔎 키워드 기반 탐색</h3>
+      <p>관심 있는 키워드로 뉴스 검색</p>
+      <a href="/search">검색하러 가기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ 커뮤니티 강조 섹션 -->
+<section class="guide">
+  <h2>💬 사용자 참여 커뮤니티</h2>
+  <div class="guide-grid">
+    <div class="card">
+      <h3>🗣 오늘의 이슈 공유</h3>
+      <p>관심 뉴스를 함께 토론하세요.</p>
+    </div>
+    <div class="card">
+      <h3>📥 뉴스 제보</h3>
+      <p>직접 찾은 뉴스 링크를 커뮤니티에 공유</p>
+    </div>
+    <div class="card">
+      <h3>🎯 인기 뉴스 투표</h3>
+      <p>오늘의 베스트 뉴스 투표 참여하기</p>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ 오늘의 뉴스 -->
+<section class="content-row">
+  <div class="news">
+    <h2>🗞 오늘의 실시간 뉴스</h2>
+    <ul>
+      {% for news in latest_news[:5] %}
+      <li>
+        <a href="{{ news.url }}">{{ news.title }}</a>
+        <span>{{ news.media }} · {{ news.date }}</span><br>
+        <small>{{ news.content[:100] }}{% if news.content|length > 100 %}...{% endif %}</small>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ✅ 회원가입 CTA -->
+<section class="cta">
+  <h2>지금 바로 가입하고 뉴스 요약을 시작하세요!</h2>
+  <a href="/signup" class="btn-cta">무료 회원가입</a>
+</section>
+
+{% endblock %}

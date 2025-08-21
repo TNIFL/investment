@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <meta charset="UTF-8">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>게시글 상세보기</h1>
+  <div class="hero-buttons">
+    <a href="/community" class="btn-outline">목록으로</a>
+    {% if post.user_id == id %}
+      <a href="/community/edit/{{ post.id }}" class="btn-primary">수정</a>
+    {% endif %}
+  </div>
+</section>
+
+<section class="post-detail">
+  <table class="post-table">
+    <tr>
+      <th>제목</th>
+      <td>{{ post.title }}</td>
+    </tr>
+    <tr>
+      <th>작성자</th>
+      <td>{{ post.user_id }}</td>
+    </tr>
+    <tr>
+      <th>작성 시간</th>
+      <td>{{ post.time.strftime('%Y-%m-%d %H:%M') }}</td>
+    </tr>
+    <tr>
+      <th>조회수</th>
+      <td>{{ post.click_count }}</td>
+    </tr>
+    <tr>
+      <th>내용</th>
+      <td style="padding: 20px;">{{ post.content | nl2br }}</td>
+    </tr>
+  </table>
+  <hr>
+  <table class="comment-table">
+    <h2>댓글</h2>
+    <form action="/community/{{ post.id }}" method="POST">
+      <input type="text" for="write-comment" name="write-comment" id="write-comment">
+      <button type="submit" class="btn-primary">작성하기</button>
+        <tr>
+          {% for comment in comments %}
+          <a>
+            <hr>
+            {{ comment }}
+          </a>
+          {% endfor %}
+        </tr>
+    </form>
+  </table>
+</section>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      alert("{{ messages[0] }}");
+    </script>
+  {% endif %}
+{% endwith %}
+{% endblock %}
